@@ -1,0 +1,23 @@
+.recruiter-postings-container {
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.job-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #fff;
+}
+
+.job-card h3 {
+  margin-top: 0;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+}

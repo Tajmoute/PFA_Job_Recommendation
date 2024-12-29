@@ -34,6 +34,11 @@ public class JobPosting {
     @Column(name = "state_country")
     private String stateCountry;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "created_by")  // foreign key column
+    private User createdBy;
+
+
     // 1) No-args constructor
     public JobPosting() {
     }
@@ -134,4 +139,11 @@ public class JobPosting {
     public void setStateCountry(String stateCountry) {
         this.stateCountry = stateCountry;
     }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;}
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JobPostingService } from '../services/job-posting.service';
 import {NgForOf, NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {AuthService} from '../services/auth.service';
 
 @Component({
   selector: 'app-job-management',
@@ -29,23 +30,42 @@ export class JobManagementComponent implements OnInit {
   }; // Model for adding/editing jobs
   isEditing = false; // Toggle between add/edit modes
 
-  constructor(private jobPostingService: JobPostingService) {}
+  userRole: string | null = null;   // <-- track the user’s role
 
+  constructor(private jobPostingService: JobPostingService , private authService: AuthService) {}
+
+  totalPages: number = 0;
+  currentPage: number = 0;
+  pageSize: number = 20;
   ngOnInit(): void {
-    this.fetchJobPostings(); // Fetch all job postings on component load
+    // 1) get the user role
+    this.userRole = this.authService.getUserRole();
+    this.fetchJobPostings(this.currentPage, this.pageSize); // Fetch all job postings on component load
   }
 
   // Fetch all job postings
-  fetchJobPostings(): void {
-    this.jobPostingService.getAllJobPostings().subscribe((data) => {
-      this.jobPostings = data;
+  fetchJobPostings(page: number, size: number): void {
+    this.jobPostingService.getPagedJobPostings(page, size).subscribe((response) => {
+      // response.content holds the actual job postings
+      this.jobPostings = response.content;
+
+      // other pagination data
+      this.totalPages = response.totalPages;
+      this.currentPage = response.number; // the page index
     });
+  }
+
+  goToPage(pageIndex: number) {
+    // Ensure pageIndex is within valid bounds
+    if (pageIndex >= 0 && pageIndex < this.totalPages) {
+      this.fetchJobPostings(pageIndex, this.pageSize);
+    }
   }
 
   // Add a new job posting
   addJobPosting(): void {
     this.jobPostingService.createJobPosting(this.currentJob).subscribe(() => {
-      this.fetchJobPostings(); // Refresh the list
+      this.fetchJobPostings(this.currentPage, this.pageSize); // Refresh the list
       this.resetForm(); // Reset the form after adding
     });
   }
@@ -61,7 +81,7 @@ export class JobManagementComponent implements OnInit {
   saveJobPosting(): void {
     if (this.currentJob.id) { // Check if it's an existing job
       this.jobPostingService.updateJobPosting(this.currentJob.id, this.currentJob).subscribe(() => {
-        this.fetchJobPostings(); // Refresh the job list
+        this.fetchJobPostings(this.currentPage, this.pageSize); // Refresh the job list
         this.resetForm(); // Reset the form after saving
       });
     }
@@ -71,7 +91,7 @@ export class JobManagementComponent implements OnInit {
   // Delete a job posting
   deleteJobPosting(id: number): void {
     this.jobPostingService.deleteJobPosting(id).subscribe(() => {
-      this.fetchJobPostings(); // Refresh the list after deletion
+      this.fetchJobPostings(this.currentPage, this.pageSize); // Refresh the list after deletion
     });
   }
 

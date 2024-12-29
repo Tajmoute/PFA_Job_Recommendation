@@ -43,14 +43,30 @@ public class AuthController {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
             );
-            String token = jwtUtil.generateToken(request.getUsername());
+
+            // 1) Find user in DB to retrieve the role
+            var userOpt = userRepository.findByUsername(request.getUsername());
+            if (userOpt.isEmpty()) {
+                return ResponseEntity.status(401).body("User not found");
+            }
+            var user = userOpt.get();
+
+            // e.g. user.getRole().getName() -> "ROLE_ADMIN" or "ROLE_USER" or "ROLE_RECRUITER"
+            String roleName = user.getRole().getName();
+
+            // 2) Pass the role to the new generateToken(...) method
+            String token = jwtUtil.generateToken(request.getUsername(), roleName);
+
+            // 3) Send token back
             Map<String, String> response = new HashMap<>();
             response.put("token", token);
             return ResponseEntity.ok(response);
+
         } catch (AuthenticationException e) {
             return ResponseEntity.status(401).body("Invalid username or password");
         }
     }
+
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody RegisterRequest registerRequest) {
         User user = new User();

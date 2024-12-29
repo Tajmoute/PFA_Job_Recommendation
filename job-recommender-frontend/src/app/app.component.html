@@ -7,9 +7,11 @@
 
 
     <a routerLink="/">Home</a>
-    <a routerLink="/job-management" *ngIf="authService.getUserRole() === 'ADMIN' || authService.getUserRole() === 'RECRUITER'">
-      Manage Job Postings
+    <a routerLink="/job-management" *ngIf="authService.getUserRole() === 'ROLE_ADMIN' || authService.getUserRole() === 'ROLE_RECRUITER'">
+      Job Postings
     </a>
+  <a routerLink="/recruiter-postings" *ngIf="authService.getUserRole() === 'ROLE_ADMIN' || authService.getUserRole() === 'ROLE_RECRUITER'">My Postings</a>
+
 
   <!-- Logout Button -->
   <button *ngIf="authService.isAuthenticated()" (click)="logout()" class="btn logout-btn">
@@ -21,47 +23,3 @@
 <router-outlet></router-outlet>
 
 
-<!--
-<div class="container">
-  <h1>{{ title }}</h1>
--->
-  <!-- Skill Input Form
-  <form (ngSubmit)="getRecommendations()">
-    <label for="skills">Enter your skills:</label>
-    <input
-      type="text"
-      id="skills"
-      name="skills"
-      [(ngModel)]="userSkillsInput"
-      placeholder="E.g., Java, Spring Boot, Angular"
-      required
-    />
-    <button type="submit">Get Recommendations</button>
-  </form>
--->
-  <!-- Recommendations Section
-  <div *ngIf="jobRecommendations.length > 0">
-    <h2>Recommended Jobs:</h2>
-    <ul>
-      <li *ngFor="let job of jobRecommendations">
-        <h3>{{ job.jobTitle || 'Untitled Job' }}</h3>
-        <p>
-          <strong>Description:</strong>
-          {{ job.jobDescription | slice:0:200 }}...
-          <span *ngIf="job.jobDescription.length > 200">
-    <a href="#" (click)="toggleFullDescription(job)">Read more</a>
-  </span>
-        </p>
-
-        <p><strong>Location:</strong> {{ job.location || 'Unknown location' }}</p>
-        <p><strong>Type:</strong> {{ job.jobType || 'Unknown type' }}</p>
-      </li>
-    </ul>
-  </div>
--->
-
-  <!-- Error Message
-  <div *ngIf="errorMessage">
-    <p class="error">{{ errorMessage }}</p>
-  </div>-->
-<!--</div>-->

@@ -75,3 +75,33 @@ form button:hover {
 .job-card button:hover {
   background-color: #0056b3;
 }
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center horizontally */
+  margin: 20px 0;
+  gap: 10px; /* spacing between items */
+}
+
+.pagination-controls button {
+  padding: 8px 16px;
+  background-color: #007bff; /* somewhat "Bootstrap blue" */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination-controls button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.page-info {
+  font-weight: bold;
+  color: #333;
+}

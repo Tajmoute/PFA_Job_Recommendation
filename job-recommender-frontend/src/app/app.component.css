@@ -1,8 +1,17 @@
+/* Keep your existing nav, logout button, username styling */
 nav {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between; /* keep space-between for brand/username vs. logout on the right */
+  align-items: center;
   padding: 10px;
   background-color: #f8f9fa;
+}
+
+.username {
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 15px;
+  color: #333;
 }
 
 .logout-btn {
@@ -17,19 +26,21 @@ nav {
 .logout-btn:hover {
   background-color: #ff1a1a;
 }
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #f8f9fa;
+
+/* NEW: style only the <a> tags that are NOT the .logout-btn */
+nav a:not(.logout-btn) {
+  color: #0056b3;               /* blue text */
+  background-color: transparent;
+  text-decoration: none;
+  margin: 0 6px;                /* small horizontal spacing */
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease-in-out;
+  font-weight: 500;             /* slightly bolder text */
 }
 
-.username {
-  font-size: 16px;
-  font-weight: bold;
-  margin-right: 15px;
-  color: #333;
+/* Hover effect */
+nav a:not(.logout-btn):hover {
+  background-color: #0056b3;
+  color: #fff;
 }
-
-

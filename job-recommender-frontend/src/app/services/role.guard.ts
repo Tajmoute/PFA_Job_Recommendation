@@ -10,7 +10,8 @@ export class RoleGuard implements CanActivate {
 
   canActivate(): boolean {
     const userRole = this.authService.getUserRole(); // Fetch user role from token or service
-    if (userRole === 'ADMIN' || userRole === 'RECRUITER') {
+    console.log('[RoleGuard] userRole is:', userRole);
+    if (userRole === 'ROLE_ADMIN' || userRole === 'ROLE_RECRUITER') {
       return true; // Allow access
     }
     this.router.navigate(['/']); // Redirect to home if unauthorized

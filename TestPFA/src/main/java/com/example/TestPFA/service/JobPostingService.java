@@ -1,7 +1,10 @@
 package com.example.TestPFA.service;
 
 import com.example.TestPFA.entity.JobPosting;
+import com.example.TestPFA.entity.User;
 import com.example.TestPFA.repository.JobPostingRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -64,4 +67,15 @@ public class JobPostingService {
      * (e.g., filtering logic based on job type, skills, etc.)
      * For now, let's keep the basic CRUD.
      */
+
+    public Page<JobPosting> getAllJobPostingsPaged(int page, int size) {
+        // PageRequest.of(pageIndex, pageSize)
+        return jobPostingRepository.findAll(PageRequest.of(page, size));
+    }
+
+    public List<JobPosting> getPostingsByUser(User user) {
+        return jobPostingRepository.findByCreatedBy(user);
+    }
+
+
 }

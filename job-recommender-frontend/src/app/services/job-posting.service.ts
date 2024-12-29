@@ -10,6 +10,12 @@ export class JobPostingService {
 
   constructor(private http: HttpClient) {}
 
+
+  getPagedJobPostings(page: number, size: number): Observable<any> {
+    return this.http.get<any>(
+      `${this.baseUrl}/paged?page=${page}&size=${size}`
+    );
+  }
   // Fetch all job postings
   getAllJobPostings(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);

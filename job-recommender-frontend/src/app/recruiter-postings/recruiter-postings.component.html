@@ -1,0 +1,24 @@
+<div class="recruiter-postings-container">
+  <h2>My Job Postings</h2>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="myPostings.length === 0 && !errorMessage">
+    <p>You have no job postings yet.</p>
+  </div>
+
+  <div class="job-card" *ngFor="let job of myPostings">
+    <h3>{{ job.jobTitle }}</h3>
+    <p>{{ job.jobDescription }}</p>
+    <p><strong>Type:</strong> {{ job.jobType }}</p>
+    <p><strong>Location:</strong> {{ job.location }}</p>
+
+    <!-- Example of a delete button for recruiters -->
+    <button (click)="deletePosting(job.id)">
+      Delete
+    </button>
+    <!-- If you want Edit functionality, add a button or link to an edit form -->
+  </div>
+</div>

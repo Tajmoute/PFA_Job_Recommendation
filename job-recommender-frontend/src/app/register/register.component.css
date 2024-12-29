@@ -1,0 +1,116 @@
+.register-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+input:focus, select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.styled-select {
+  background-color: #fefefe;
+  color: #333;
+  cursor: pointer;
+}
+
+.styled-select option {
+  padding: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.success-message {
+  color: #28a745;
+  font-size: 14px;
+  text-align: center;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 14px;
+  text-align: center;
+}
+
+.role-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.role-container label {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.role-container select {
+  font-size: 16px;
+  padding: 10px;
+}
+.switch-page {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.switch-page p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.switch-page a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.switch-page a:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}

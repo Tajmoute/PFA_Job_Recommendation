@@ -1,0 +1,19 @@
+# Java-related
+/target
+*.class
+*.jar
+
+# Python-related
+__pycache__/
+*.pyc
+
+# Node.js/Angular-related
+node_modules/
+dist/
+
+# OS or IDE files
+*.log
+.DS_Store
+.idea/
+.vscode/
+

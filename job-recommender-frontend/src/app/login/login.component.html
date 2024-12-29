@@ -1,0 +1,36 @@
+<div class="login-container">
+  <h2>Login</h2>
+  <form (ngSubmit)="onLogin()">
+    <div>
+      <label for="username">Username:</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        [(ngModel)]="username"
+        required
+      />
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        [(ngModel)]="password"
+        required
+      />
+    </div>
+    <button type="submit" class="btn">Login</button>
+  </form>
+  <!-- Add link to registration page -->
+  <div class="switch-page">
+    <p>Don't have an account?</p>
+    <a routerLink="/register">Create New Account</a>
+  </div>
+
+  <!-- Display error message if login fails -->
+  <div *ngIf="errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="user-management">
+  <h2>User Management</h2>
+
+  <!-- Add User Button -->
+  <button (click)="toggleForm()" class="btn add-user-btn">
+    {{ showForm ? 'Close Form' : 'Add User' }}
+  </button>
+
+  <!-- User Form -->
+  <form *ngIf="showForm" (ngSubmit)="isEditing ? saveUser() : addUser()">
+    <h3>{{ isEditing ? 'Edit User' : 'Add New User' }}</h3>
+    <label for="username">Username</label>
+    <input id="username" [(ngModel)]="userModel.username" name="username" required />
+
+    <label for="password">Password</label>
+    <input id="password" [(ngModel)]="userModel.password" name="password" type="password" />
+
+    <label for="email">Email</label>
+    <input id="email" [(ngModel)]="userModel.email" name="email" type="email" required />
+
+    <label for="phoneNumber">Phone Number</label>
+    <input id="phoneNumber" [(ngModel)]="userModel.phoneNumber" name="phoneNumber" required />
+
+    <label for="role">Role</label>
+    <select id="role" [(ngModel)]="userModel.role.name" name="role.name" required>
+      <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+    </select>
+
+    <button type="submit">{{ isEditing ? 'Save Changes' : 'Add User' }}</button>
+    <button type="button" (click)="resetForm(); toggleForm()">Cancel</button>
+  </form>
+
+  <!-- User List -->
+  <table>
+    <thead>
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Role</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.username }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.phoneNumber }}</td>
+      <td>{{ user.roleName }}</td>
+      <td>
+        <button (click)="editUser(user)">Edit</button>
+        <button (click)="deleteUser(user.id)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

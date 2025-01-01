@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JobPostingService } from '../services/job-posting.service';
-import {NgForOf, NgIf} from '@angular/common';
+import {NgForOf, NgIf, SlicePipe} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
 
@@ -8,11 +8,12 @@ import {AuthService} from '../services/auth.service';
   selector: 'app-job-management',
   templateUrl: './job-management.component.html',
   standalone: true,
-  imports: [
-    NgForOf,
-    NgIf,
-    FormsModule
-  ],
+    imports: [
+        NgForOf,
+        NgIf,
+        FormsModule,
+        SlicePipe
+    ],
   styleUrls: ['./job-management.component.css']
 })
 export class JobManagementComponent implements OnInit {
@@ -31,6 +32,9 @@ export class JobManagementComponent implements OnInit {
   isEditing = false; // Toggle between add/edit modes
 
   userRole: string | null = null;   // <-- track the user’s role
+
+  // Set to track expanded job descriptions by their unique ID
+  expandedJobs: Set<string> = new Set();
 
   constructor(private jobPostingService: JobPostingService , private authService: AuthService) {}
 
@@ -112,4 +116,17 @@ export class JobManagementComponent implements OnInit {
 
 
 }
+  // Toggle the expanded state of a job description
+  toggleFullDescription(job: any): void {
+    if (this.expandedJobs.has(job.uniqId)) {
+      this.expandedJobs.delete(job.uniqId);
+    } else {
+      this.expandedJobs.add(job.uniqId);
+    }
+  }
+
+  // Check if a job description is expanded
+  isExpanded(job: any): boolean {
+    return this.expandedJobs.has(job.uniqId);
+  }
 }

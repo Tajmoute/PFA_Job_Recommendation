@@ -105,3 +105,66 @@ form button:hover {
   font-weight: bold;
   color: #333;
 }
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input[type='text'] {
+  padding: 10px;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+a {
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Optional: Add transitions for smooth expansion */
+p {
+  transition: all 0.3s ease-in-out;
+}

@@ -12,7 +12,12 @@
     </a>
   <a routerLink="/recruiter-postings" *ngIf="authService.getUserRole() === 'ROLE_ADMIN' || authService.getUserRole() === 'ROLE_RECRUITER'">My Postings</a>
 
-
+  <a
+    routerLink="/user-management"
+    *ngIf="authService.getUserRole() === 'ROLE_ADMIN'"
+  >
+    User Management
+  </a>
   <!-- Logout Button -->
   <button *ngIf="authService.isAuthenticated()" (click)="logout()" class="btn logout-btn">
     Logout

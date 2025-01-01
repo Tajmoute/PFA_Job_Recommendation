@@ -32,7 +32,22 @@
   <!-- Job List -->
   <div *ngFor="let job of jobPostings" class="job-card">
     <h3>{{ job.jobTitle }}</h3>
-    <p>{{ job.jobDescription }}</p>
+    <p>
+      <strong>Description:</strong>
+      <!-- Conditionally display truncated or full description -->
+      <span *ngIf="!isExpanded(job)">
+            {{ job.jobDescription | slice:0:200 }}...
+            <a href="#" (click)="toggleFullDescription(job); $event.preventDefault()">
+              Read more
+            </a>
+          </span>
+      <span *ngIf="isExpanded(job)">
+            {{ job.jobDescription }}
+        <a href="#" (click)="toggleFullDescription(job); $event.preventDefault()">
+              Read less
+            </a>
+          </span>
+    </p>
     <p><strong>Type:</strong> {{ job.jobType }}</p>
     <p><strong>Location:</strong> {{ job.location }}</p>
     <button *ngIf="userRole === 'ROLE_ADMIN'" (click)="editJobPosting(job)">Edit</button>

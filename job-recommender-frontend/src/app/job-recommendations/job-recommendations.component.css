@@ -45,3 +45,19 @@ li {
   padding: 10px 0;
   border-bottom: 1px solid #ddd;
 }
+
+a {
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Optional: Add transitions for smooth expansion */
+p {
+  transition: all 0.3s ease-in-out;
+}

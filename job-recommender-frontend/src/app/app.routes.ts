@@ -8,6 +8,8 @@ import { AuthRedirectGuard } from './services/auth-redirect.guard';
 import {JobManagementComponent} from './job-management/job-management.component';
 import {RoleGuard} from './services/role.guard';
 import {RecruiterPostingsComponent} from './recruiter-postings/recruiter-postings.component';
+import {UserManagementComponent} from './user-management/user-management.component';
+import {AdminGuard} from './services/admin.guard';
 
 
 export const routes: Routes = [
@@ -17,5 +19,6 @@ export const routes: Routes = [
   { path: 'recommendations', component: JobRecommendationsComponent, canActivate: [AuthGuard] },
   { path: 'job-management', component: JobManagementComponent, canActivate: [RoleGuard] },
   {path: 'recruiter-postings', component: RecruiterPostingsComponent, canActivate: [RoleGuard] },// or a new guard that ensures user is ROLE_RECRUITER
+  { path: 'user-management', component: UserManagementComponent, canActivate: [AdminGuard] },
   { path: '**', redirectTo: '' }, // Redirect unknown paths to Home page
 ];

@@ -16,6 +16,8 @@ export class JobRecommendationsComponent {
   userSkillsInput = '';
   jobRecommendations: any[] = [];
   errorMessage = '';
+  // Set to track expanded job descriptions by their unique ID
+  expandedJobs: Set<string> = new Set();
 
   constructor(private jobService: JobRecommendationService) {}
 
@@ -42,7 +44,17 @@ export class JobRecommendationsComponent {
     );
   }
 
+  // Toggle the expanded state of a job description
   toggleFullDescription(job: any): void {
-    alert(`Full Description:\n${job.jobDescription}`);
+    if (this.expandedJobs.has(job.uniqId)) {
+      this.expandedJobs.delete(job.uniqId);
+    } else {
+      this.expandedJobs.add(job.uniqId);
+    }
+  }
+
+  // Check if a job description is expanded
+  isExpanded(job: any): boolean {
+    return this.expandedJobs.has(job.uniqId);
   }
 }
